@@ -78,3 +78,8 @@ Then visit `http://localhost:8000/`. No Node.js, dependencies, package installat
 - Keep `og:url` and `canonical` metadata consistent if you change the website URL.
 
 The site has a skip link, semantic landmarks, accessible menu buttons and live feedback, visible keyboard focus, and a `prefers-reduced-motion` fallback.
+
+
+## 2026 update — FORME. Home & Living
+
+A fourth project card and a detailed e-commerce case study were added. Publish the separate `forme-home-living` repository first. Only then upload this complete portfolio folder contents (not the folder itself) to the existing `github.io` repository, replacing existing files when prompted. The new project links point to `https://ifeoluwaojo-dev.github.io/forme-home-living/`.
