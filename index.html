@@ -1,932 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ifeoluwa Ojo — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --navy: #0a1628;
-    --navy-mid: #132240;
-    --navy-light: #1e3460;
-    --gold: #c9922a;
-    --gold-light: #e8b855;
-    --cream: #f5f0e8;
-    --cream-dark: #e8dfc9;
-    --white: #faf9f7;
-    --text-dim: #8a9bb5;
-    --text-muted: #5a7090;
-    --font-serif: 'DM Serif Display', Georgia, serif;
-    --font-sans: 'DM Sans', sans-serif;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--navy);
-    color: var(--cream);
-    font-family: var(--font-sans);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(10, 22, 40, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201, 146, 42, 0.15);
-  }
-  .nav-logo {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    color: var(--gold-light);
-    text-decoration: none;
-    letter-spacing: 0.02em;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-
-  /* SECTIONS */
-  section { padding: 5rem 0; }
-
-  .container { max-width: 1100px; margin: 0 auto; padding: 0 4rem; }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex; align-items: center;
-    position: relative;
-    padding-top: 6rem;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute; top: 0; right: 0;
-    width: 55%; height: 100%;
-    background: radial-gradient(ellipse at 70% 40%, rgba(201,146,42,0.08) 0%, transparent 65%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-  .hero-tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid rgba(201,146,42,0.35);
-    padding: 0.35rem 1rem;
-    border-radius: 2rem;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    line-height: 1.1;
-    color: var(--white);
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--gold-light);
-  }
-  .hero-desc {
-    font-size: 1.05rem;
-    color: var(--text-dim);
-    line-height: 1.8;
-    max-width: 460px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-cta {
-    display: flex; gap: 1rem; flex-wrap: wrap;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: var(--gold);
-    color: var(--navy);
-    font-family: var(--font-sans);
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.04em;
-    padding: 0.85rem 1.8rem;
-    border-radius: 0.4rem;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .btn-ghost {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    background: transparent;
-    color: var(--cream);
-    font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.9rem;
-    padding: 0.85rem 1.8rem;
-    border-radius: 0.4rem;
-    border: 1px solid rgba(245,240,232,0.2);
-    text-decoration: none;
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-light); }
-
-  /* HERO VISUAL PANEL */
-  .hero-visual {
-    display: flex; flex-direction: column; gap: 1rem;
-    position: relative;
-  }
-  .hero-card {
-    background: var(--navy-mid);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 1rem;
-    padding: 1.5rem;
-  }
-  .hero-card-header {
-    display: flex; align-items: center; gap: 0.75rem;
-    margin-bottom: 1rem;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-  .stats-row {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-  }
-  .stat-box {
-    background: rgba(255,255,255,0.04);
-    border-radius: 0.6rem;
-    padding: 1rem;
-    text-align: center;
-  }
-  .stat-num {
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    color: var(--gold-light);
-    display: block;
-  }
-  .stat-lbl {
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 0.2rem;
-  }
-  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .chip {
-    font-size: 0.78rem;
-    padding: 0.3rem 0.85rem;
-    border-radius: 2rem;
-    font-weight: 500;
-    background: rgba(201,146,42,0.12);
-    color: var(--gold-light);
-    border: 1px solid rgba(201,146,42,0.25);
-  }
-  .chip.blue {
-    background: rgba(55,138,221,0.1);
-    color: #85b7eb;
-    border-color: rgba(55,138,221,0.25);
-  }
-
-  /* DIVIDER */
-  .divider {
-    width: 60px; height: 2px;
-    background: var(--gold);
-    margin: 0 0 1.5rem;
-  }
-
-  /* SECTION LABELS */
-  .section-tag {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-    display: block;
-  }
-  .section-title {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    color: var(--white);
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-  .section-desc {
-    font-size: 1rem;
-    color: var(--text-dim);
-    max-width: 560px;
-    margin-bottom: 3rem;
-  }
-
-  /* ABOUT */
-  #about { background: var(--navy-mid); }
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-  .about-text p {
-    color: var(--text-dim);
-    margin-bottom: 1.2rem;
-    font-size: 1rem;
-    line-height: 1.85;
-  }
-  .about-highlight {
-    border-left: 2px solid var(--gold);
-    padding-left: 1.2rem;
-    margin: 1.8rem 0;
-    font-size: 1.05rem;
-    color: var(--cream);
-    font-style: italic;
-    line-height: 1.7;
-  }
-  .skills-block { display: flex; flex-direction: column; gap: 1.5rem; }
-  .skill-group-title {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.6rem;
-  }
-  .skill-bar-row { display: flex; flex-direction: column; gap: 0.9rem; }
-  .skill-bar-item { display: flex; flex-direction: column; gap: 0.3rem; }
-  .skill-bar-label {
-    display: flex; justify-content: space-between;
-    font-size: 0.85rem;
-    color: var(--cream-dark);
-  }
-  .skill-bar-label span:last-child { color: var(--text-dim); }
-  .skill-bar-track {
-    height: 4px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .skill-bar-fill {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 2px;
-    transition: width 1.2s cubic-bezier(.4,0,.2,1);
-  }
-  .skill-bar-fill.blue { background: #378add; }
-
-  /* EXPERIENCE */
-  .exp-block {
-    display: flex;
-    gap: 2rem;
-    position: relative;
-    padding-bottom: 2.5rem;
-  }
-  .exp-block:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 17px; top: 36px;
-    width: 1px; height: calc(100% - 36px);
-    background: rgba(201,146,42,0.2);
-  }
-  .exp-dot {
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: rgba(201,146,42,0.12);
-    border: 2px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 3px;
-  }
-  .exp-dot svg { width: 14px; height: 14px; fill: var(--gold-light); }
-  .exp-content {}
-  .exp-date {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
-  }
-  .exp-role {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.2rem;
-  }
-  .exp-company {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 0.8rem;
-  }
-  .exp-list { list-style: none; }
-  .exp-list li {
-    color: var(--text-dim);
-    font-size: 0.95rem;
-    padding: 0.3rem 0;
-    padding-left: 1.2rem;
-    position: relative;
-  }
-  .exp-list li::before {
-    content: '—';
-    position: absolute; left: 0;
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  /* PROJECTS */
-  #projects {}
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  .project-card {
-    background: var(--navy-mid);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 1rem;
-    padding: 1.75rem;
-    transition: border-color 0.25s, transform 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .project-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .project-card:hover {
-    border-color: rgba(201,146,42,0.3);
-    transform: translateY(-4px);
-  }
-  .project-card:hover::before { opacity: 1; }
-  .project-type {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-    display: flex; align-items: center; gap: 0.5rem;
-  }
-  .project-type-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-  .project-title {
-    font-family: var(--font-serif);
-    font-size: 1.35rem;
-    color: var(--white);
-    margin-bottom: 0.7rem;
-    line-height: 1.3;
-  }
-  .project-desc {
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    line-height: 1.75;
-    margin-bottom: 1.2rem;
-  }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-  .project-tag {
-    font-size: 0.73rem;
-    padding: 0.2rem 0.7rem;
-    border-radius: 2rem;
-    background: rgba(255,255,255,0.06);
-    color: var(--text-muted);
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-  .project-link {
-    display: inline-flex; align-items: center; gap: 0.45rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--gold);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: gap 0.2s;
-  }
-  .project-link:hover { gap: 0.7rem; }
-  .project-status {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.65rem;
-    border-radius: 2rem;
-    background: rgba(29, 158, 117, 0.12);
-    color: #5dcaa5;
-    border: 1px solid rgba(29,158,117,0.25);
-    margin-left: 0.75rem;
-  }
-  .project-status.wip {
-    background: rgba(201,146,42,0.1);
-    color: var(--gold-light);
-    border-color: rgba(201,146,42,0.25);
-  }
-
-  /* CONTACT */
-  #contact { background: var(--navy-mid); }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 5rem;
-    align-items: center;
-  }
-  .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
-  .contact-item {
-    display: flex; align-items: center; gap: 1rem;
-    padding: 1rem 1.2rem;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 0.7rem;
-    text-decoration: none;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .contact-item:hover {
-    border-color: rgba(201,146,42,0.3);
-    background: rgba(201,146,42,0.05);
-  }
-  .contact-icon {
-    width: 40px; height: 40px;
-    border-radius: 0.5rem;
-    background: rgba(201,146,42,0.12);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .contact-icon svg { width: 18px; height: 18px; fill: var(--gold-light); }
-  .contact-item-label { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.1rem; }
-  .contact-item-value { font-size: 0.9rem; color: var(--cream); font-weight: 500; }
-
-  /* FORM */
-  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-  .form-input, .form-textarea {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 0.5rem;
-    color: var(--cream);
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    padding: 0.8rem 1rem;
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-    resize: none;
-  }
-  .form-input:focus, .form-textarea:focus {
-    border-color: var(--gold);
-    background: rgba(201,146,42,0.05);
-  }
-  .form-textarea { min-height: 110px; }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    font-size: 0.82rem;
-    color: var(--text-dim);
-  }
-  footer strong { color: var(--gold); }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--navy); }
-  ::-webkit-scrollbar-thumb { background: rgba(201,146,42,0.3); border-radius: 3px; }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    .container { padding: 0 1.5rem; }
-    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero-visual { display: none; }
-    section { padding: 3.5rem 0; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171923">
+  <meta name="description" content="Ifeoluwa Ojo is a research-focused generalist exploring AI response evaluation, evidence-led thinking, clear communication, and digital experiences.">
+  <meta name="author" content="Ifeoluwa Kolawole Ojo">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ifeoluwa Ojo — Research, Reasoning & AI Evaluation">
+  <meta property="og:description" content="Good questions. Better answers. A research-led portfolio spanning AI response evaluation, analysis, and digital work.">
+  <meta property="og:image" content="https://ifeoluwaojo-dev.github.io/github.io/assets/img/og-cover.png">
+  <meta property="og:url" content="https://ifeoluwaojo-dev.github.io/github.io/">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://ifeoluwaojo-dev.github.io/github.io/">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <title>Ifeoluwa Ojo — Research, Reasoning & AI Evaluation</title>
+  <script defer src="assets/js/main.js"></script>
 </head>
-<body>
+<body class="page-home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-loader" aria-hidden="true"><span class="loader-asterisk">✳</span></div>
+  <header class="site-header" id="site-header">
+    <div class="nav-shell wrap">
+      <a class="brand" href="#top" aria-label="Ifeoluwa Ojo, homepage"><span class="brand-icon">i<span>✳</span></span><span class="brand-name">IFEOLUWA<br>OJO.</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#work">Work <sup>03</sup></a>
+        <a href="#approach">Approach</a>
+        <a href="#about">About</a>
+      </nav>
+      <a class="nav-contact" href="mailto:ifeoluwaojo211@gmail.com">LET'S TALK <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+    </div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" inert>
+      <a href="#work">01 / Selected work</a><a href="#approach">02 / The approach</a><a href="#about">03 / About me</a><a href="#contact">04 / Let's talk</a>
+    </nav>
+  </header>
 
-<!-- NAV -->
-<nav>
-  <a href="#home" class="nav-logo">Ifeoluwa Ojo</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-topline reveal"><span class="eyebrow light"><span class="signal-dot"></span> INDEPENDENT RESEARCHER & GENERALIST</span><span class="hero-edition">PORTFOLIO / VOL. 01 — 2026</span></div>
+        <div class="hero-copy">
+          <p class="hero-intro reveal">Hello, I'm Ifeoluwa Ojo <span class="hello-mark" aria-hidden="true">✳</span></p>
+          <h1 id="hero-title" class="hero-title reveal">Good <span class="outlined">questions.</span><br><em>Better</em> answers<span class="title-fullstop">.</span></h1>
+          <div class="hero-subrow reveal"><p>I turn complex information into <strong>clear thinking</strong> — through research, careful reasoning, and an eye for the details that matter.</p><a class="round-link" href="#work" aria-label="Scroll to selected work"><span aria-hidden="true">↓</span></a></div>
+        </div>
+        <div class="hero-object" aria-hidden="true">
+          <div class="object-orbit orbit-one"></div><div class="object-orbit orbit-two"></div>
+          <div class="object-disc"><div class="object-core"><span class="object-core-star">✳</span><span class="object-core-copy">LOOK<br>CLOSER<span class="micro-star">✳</span></span></div></div>
+          <div class="object-tag tag-top">A CURIOUS MIND <span>↗</span></div><div class="object-tag tag-bottom">A STRUCTURED APPROACH <span>↗</span></div>
+        </div>
+        <div class="hero-baseline reveal"><span>RESEARCH <i>✳</i> REASONING <i>✳</i> AI EVALUATION</span><span>SCROLL TO EXPLORE <span aria-hidden="true">↙</span></span></div>
+      </div>
+      <div class="hero-corner" aria-hidden="true">I/O</div>
+    </section>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-left">
-        <span class="hero-tag">Marine Engineer &amp; Web Developer</span>
-        <h1>Engineering the <em>Physical</em> &amp; <em>Digital</em> World</h1>
-        <p class="hero-desc">
-          Marine Engineering graduate passionate about maintaining complex systems
-          and building clean, functional web experiences. Based in Abeokuta, Nigeria.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn-primary">
-            View Projects
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+    <div class="ticker" aria-label="Specialties: thoughtful research, sharper analysis, clearer communication">
+      <div class="ticker-track" aria-hidden="true"><span>THOUGHTFUL RESEARCH</span><i>✳</i><span>SHARPER ANALYSIS</span><i>✳</i><span>CLEARER COMMUNICATION</span><i>✳</i><span>THOUGHTFUL RESEARCH</span><i>✳</i><span>SHARPER ANALYSIS</span><i>✳</i><span>CLEARER COMMUNICATION</span><i>✳</i></div>
+    </div>
+
+    <section class="intro-section section-pad" id="approach" aria-labelledby="intro-title">
+      <div class="wrap">
+        <div class="section-kicker reveal"><span>( 01 — THE LENS )</span><span>A LITTLE ABOUT HOW I THINK</span></div>
+        <div class="intro-grid">
+          <h2 class="section-display intro-title reveal" id="intro-title">Curious by<br>nature<span class="highlight-swipe">.</span><br><em>Precise</em> by<br>practice.</h2>
+          <div class="intro-aside reveal"><div class="line-doodle" aria-hidden="true"><svg viewBox="0 0 190 110"><path d="M4 54C35 10 69 11 97 53c18 30 49 30 81-26M155 24l23 3-2 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></div><p>I'm a research-focused generalist with a background in engineering and an interest in how we evaluate information, systems, and AI-generated responses.</p><p>My process is simple: ask better questions, follow the evidence, make the comparison, and explain the decision.</p><a class="text-link" href="#about">Get to know me <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <div class="expertise-strip reveal" aria-label="Areas of expertise"><span class="strip-title">IN MY TOOLKIT <span>↘</span></span><div class="expertise-items"><span>Source evaluation</span><span>Critical reasoning</span><span>Fact-checking</span><span>Rubric design</span><span>Clear writing</span></div></div>
+      </div>
+    </section>
+
+    <section class="work-section section-pad" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="section-kicker reveal"><span>( 02 — SELECTED WORK )</span><span>PROOF OF THE PROCESS</span></div>
+        <div class="work-header reveal"><h2 class="section-display" id="work-title">Thinking, <em>in action.</em></h2><p>Selected explorations across AI evaluation, academic research, and the web — each rooted in problem-solving.</p></div>
+        <div class="projects-grid">
+          <a class="project-card project-feature reveal" href="work/ai-response-evaluation.html" aria-label="View AI Response Evaluation case study">
+            <div class="project-media media-ai"><img loading="lazy" src="assets/img/project-evaluation.svg" alt="Abstract split-screen artwork comparing two candidate responses against an evaluation rubric"><span class="project-open" aria-hidden="true">↗</span></div>
+            <div class="project-meta"><span class="project-number">01 / FEATURED CASE STUDY</span><span class="project-type">AI EVALUATION · 2026</span></div>
+            <div class="project-heading"><h3>Good answers don't<br>happen by accident.</h3><span class="project-arrow" aria-hidden="true">↗</span></div><p class="project-description">An independent exercise exploring response quality, instruction adherence, and fair comparison across 20 author-created illustrative pairs.</p>
           </a>
-          <a href="#contact" class="btn-ghost">Get in Touch</a>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <div class="dot"></div>
-            At a Glance
-          </div>
-          <div class="stats-row">
-            <div class="stat-box">
-              <span class="stat-num">B.Eng</span>
-              <span class="stat-lbl">Marine Eng.</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-num">6mo</span>
-              <span class="stat-lbl">Industry Exp.</span>
-            </div>
-            <div class="stat-box">
-              <span class="stat-num">2025</span>
-              <span class="stat-lbl">Graduate</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <div class="dot"></div>
-            Skills
-          </div>
-          <div class="skill-chips">
-            <span class="chip">Marine Systems</span>
-            <span class="chip">HSE Compliance</span>
-            <span class="chip">Technical Docs</span>
-            <span class="chip blue">HTML &amp; CSS</span>
-            <span class="chip blue">JavaScript</span>
-            <span class="chip blue">Git / GitHub</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text">
-        <span class="section-tag">About Me</span>
-        <h2 class="section-title">Engineer by training, builder by nature</h2>
-        <p>
-          I graduated with a Bachelor of Engineering in Marine Engineering from Rivers State University, Port Harcourt in 2025. My academic journey gave me a deep understanding of marine systems, propulsion, and the technical rigor required to keep complex machinery running safely.
-        </p>
-        <blockquote class="about-highlight">
-          "I believe that engineering — whether of ships or software — is fundamentally about solving real problems for real people."
-        </blockquote>
-        <p>
-          Alongside my engineering foundation, I have been building front-end web development skills, exploring HTML, CSS, and JavaScript to create clean, user-friendly interfaces. I am looking for opportunities where I can apply both disciplines.
-        </p>
-        <p>
-          Outside of work, I am passionate about continuous learning, staying up-to-date with engineering innovations, and contributing to projects that make a difference.
-        </p>
-      </div>
-
-      <div class="skills-block">
-        <span class="section-tag">Core Skills</span>
-
-        <div>
-          <div class="skill-group-title">Engineering</div>
-          <div class="skill-bar-row">
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>Marine Systems</span><span>Intermediate</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>Equipment Maintenance</span><span>Intermediate</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>HSE Compliance</span><span>Intermediate</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:68%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>Technical Documentation</span><span>Proficient</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="skill-group-title">Web Development</div>
-          <div class="skill-bar-row">
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>HTML &amp; CSS</span><span>Developing</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill blue" style="width:60%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>JavaScript</span><span>Developing</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill blue" style="width:50%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label"><span>Git / GitHub</span><span>Developing</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill blue" style="width:55%"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <span class="section-tag">Experience &amp; Education</span>
-    <h2 class="section-title">My Journey</h2>
-    <p class="section-desc">A track record of hands-on learning, real-world application, and continuous growth.</p>
-
-    <div class="exp-block">
-      <div class="exp-dot">
-        <svg viewBox="0 0 24 24"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zm-9 7H7v-2h4v2zm6-4h-4V8h4v2z"/></svg>
-      </div>
-      <div class="exp-content">
-        <div class="exp-date">2024 — 6 Months</div>
-        <div class="exp-role">Intern Engineer</div>
-        <div class="exp-company">Geo-Lind Nigeria Limited</div>
-        <ul class="exp-list">
-          <li>Assisted with equipment inspection and scheduled maintenance operations</li>
-          <li>Prepared and maintained technical reports and engineering documentation</li>
-          <li>Supported field engineering operations under senior engineer supervision</li>
-          <li>Gained practical, hands-on marine engineering experience in a live environment</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-block">
-      <div class="exp-dot">
-        <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
-      </div>
-      <div class="exp-content">
-        <div class="exp-date">2021 — 2025</div>
-        <div class="exp-role">B.Eng. in Marine Engineering</div>
-        <div class="exp-company">Rivers State University, Port Harcourt, Nigeria</div>
-        <ul class="exp-list">
-          <li>Studied marine propulsion systems, naval architecture, and offshore engineering</li>
-          <li>Completed coursework in HSE (Health, Safety &amp; Environment) compliance</li>
-          <li>Applied engineering fundamentals to real-world vessel maintenance scenarios</li>
-          <li>Graduated in 2025 with a Bachelor of Engineering degree</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="exp-block">
-      <div class="exp-dot">
-        <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
-      </div>
-      <div class="exp-content">
-        <div class="exp-date">2024 — Ongoing</div>
-        <div class="exp-role">Self-taught Front-End Developer</div>
-        <div class="exp-company">Independent / Online Learning</div>
-        <ul class="exp-list">
-          <li>Building proficiency in HTML, CSS, and JavaScript through project-based learning</li>
-          <li>Version control with Git and collaborative workflows via GitHub</li>
-          <li>Developing responsive, accessible web interfaces and UIs</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" style="background: var(--navy-mid);">
-  <div class="container">
-    <span class="section-tag">Projects</span>
-    <h2 class="section-title">What I've Built</h2>
-    <p class="section-desc">
-      A selection of engineering and web development projects — from academic work to personal builds. More are on the way as I continue to grow.
-    </p>
-
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-type"><div class="project-type-dot"></div> Marine Engineering</div>
-        <div class="project-title">Vessel Maintenance Report System</div>
-        <p class="project-desc">
-          Designed and structured a maintenance documentation framework during my internship at Geo-Lind Nigeria Limited, streamlining the reporting process for equipment inspection records and field operations.
-        </p>
-        <div class="project-tags">
-          <span class="project-tag">Technical Writing</span>
-          <span class="project-tag">Marine Systems</span>
-          <span class="project-tag">HSE</span>
-        </div>
-        <span style="font-size:0.82rem; color: var(--text-dim); font-style: italic;">Professional work — documentation unavailable publicly</span>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type"><div class="project-type-dot"></div> Web Development</div>
-        <div class="project-title">Personal Portfolio Website
-          <span class="project-status wip">In Progress</span>
-        </div>
-        <p class="project-desc">
-          Designing and building this portfolio from scratch using vanilla HTML, CSS, and JavaScript — applying layout design, responsive styling, and accessibility best practices learned during self-study.
-        </p>
-        <div class="project-tags">
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS</span>
-          <span class="project-tag">JavaScript</span>
-          <span class="project-tag">Responsive Design</span>
-        </div>
-        <a href="https://github.com/ifeoluwaojo-dev" class="project-link" target="_blank">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-      </div>
-
-      <div class="project-card">
-        <div class="project-type"><div class="project-type-dot"></div> Web Development</div>
-        <div class="project-title">Responsive Landing Page
-          <span class="project-status wip">In Progress</span>
-        </div>
-        <p class="project-desc">
-          A practice project building a fully responsive multi-section landing page layout — focusing on Flexbox, CSS Grid, semantic HTML structure, and smooth scroll interactions.
-        </p>
-        <div class="project-tags">
-          <span class="project-tag">HTML</span>
-          <span class="project-tag">CSS Grid</span>
-          <span class="project-tag">Flexbox</span>
-          <span class="project-tag">JavaScript</span>
-        </div>
-        <a href="https://github.com/ifeoluwaojo-dev" class="project-link" target="_blank">
-          View on GitHub
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-        </a>
-      </div>
-
-      <div class="project-card" style="border: 1px dashed rgba(201,146,42,0.2); background: rgba(255,255,255,0.02);">
-        <div class="project-type"><div class="project-type-dot" style="background: var(--text-dim)"></div> <span style="color: var(--text-dim)">Coming Soon</span></div>
-        <div class="project-title" style="color: var(--text-muted)">Your Next Project</div>
-        <p class="project-desc">
-          This is your space to showcase the next project you build. Keep adding, keep creating — every commit matters.
-        </p>
-        <span style="font-size:0.82rem; color: var(--text-dim); font-style: italic;">Add your project here — replace this placeholder</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-grid">
-      <div>
-        <span class="section-tag">Get In Touch</span>
-        <h2 class="section-title">Let's Work Together</h2>
-        <p class="section-desc">
-          Whether you have an engineering opportunity, a web project, or just want to connect — I'd love to hear from you.
-        </p>
-
-        <div class="contact-info">
-          <a class="contact-item" href="mailto:ifeoluwaojo211@gmail.com">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Email</div>
-              <div class="contact-item-value">ifeoluwaojo211@gmail.com</div>
-            </div>
+          <a class="project-card project-half reveal" href="work/research-and-analysis.html" aria-label="View Research and Analysis case study">
+            <div class="project-media media-research"><img loading="lazy" src="assets/img/project-research.svg" alt="Abstract blue engineering blueprint with concentric arcs, plotted points, and technical guide lines"><span class="project-open" aria-hidden="true">↗</span></div>
+            <div class="project-meta"><span class="project-number">02 / ACADEMIC WORK</span><span class="project-type">RESEARCH · 2025</span></div>
+            <div class="project-heading"><h3>Making sense of<br>complex systems.</h3><span class="project-arrow" aria-hidden="true">↗</span></div><p class="project-description">Evidence synthesis, technical trade-offs, and structured reporting through engineering research.</p>
           </a>
-
-          <a class="contact-item" href="https://github.com/ifeoluwaojo-dev" target="_blank">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">GitHub</div>
-              <div class="contact-item-value">github.com/ifeoluwaojo-dev</div>
-            </div>
+          <a class="project-card project-half reveal" href="work/this-website.html" aria-label="View Portfolio Website case study">
+            <div class="project-media media-web"><img loading="lazy" src="assets/img/project-portfolio.svg" alt="Stylized layered website windows with large editorial typography and a lime-green accent star"><span class="project-open" aria-hidden="true">↗</span></div>
+            <div class="project-meta"><span class="project-number">03 / DIGITAL EXPERIMENT</span><span class="project-type">WEB DEVELOPMENT · 2026</span></div>
+            <div class="project-heading"><h3>A home for<br>the curious mind.</h3><span class="project-arrow" aria-hidden="true">↗</span></div><p class="project-description">A design-led, accessible, responsive space where analytical thinking meets an expressive digital experience.</p>
           </a>
-
-          <a class="contact-item" href="https://linkedin.com/in/ifeoluwa-ojo-a82b01412" target="_blank">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">LinkedIn</div>
-              <div class="contact-item-value">Ifeoluwa Ojo</div>
-            </div>
-          </a>
-
-          <div class="contact-item" style="cursor:default;">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-            </div>
-            <div>
-              <div class="contact-item-label">Phone</div>
-              <div class="contact-item-value">+234 805 736 1890</div>
-            </div>
-          </div>
         </div>
       </div>
+    </section>
 
-      <div>
-        <div data-fs-success style="display:none; background:rgba(29,158,117,0.1); border:1px solid rgba(29,158,117,0.3); border-radius:0.7rem; padding:1.25rem 1.5rem; color:#5dcaa5; font-size:0.95rem; line-height:1.6;">
-          ✓ Message sent! Thanks for reaching out — I'll get back to you soon.
+    <section class="lab-section section-pad" id="lab" aria-labelledby="lab-title">
+      <div class="wrap lab-layout">
+        <div class="lab-intro reveal"><div class="section-kicker section-kicker-light"><span>( 03 — THE PLAYGROUND )</span></div><span class="lab-sticker">YOUR TURN <span aria-hidden="true">↘</span></span><h2 class="section-display" id="lab-title">A little<br><em>test of</em><br>judgment<span class="dot-lime">.</span></h2><p>What makes one answer better than another? Try a tiny version of the comparative evaluation exercise.</p><span class="lab-footnote">Based on fictional examples from my independent practice case study. Not a live AI benchmark.</span></div>
+        <div class="quiz-card reveal" id="evaluation-demo">
+          <div class="quiz-head"><span class="quiz-badge"><span class="quiz-pulse"></span> MINI EVALUATION LAB</span><span class="quiz-progress" id="quiz-progress">CASE 01 / 03</span></div>
+          <div class="quiz-rule"></div><p class="quiz-eyebrow" id="quiz-category">01 — REASONING</p><h3 class="quiz-prompt" id="quiz-prompt">All roses are flowers. Does that mean all flowers are roses?</h3>
+          <p class="quiz-instruction">Which answer is stronger? Pick one.</p>
+          <div class="quiz-answers"><button class="answer-option" type="button" data-option="A"><span class="answer-letter">A</span><span class="answer-copy" id="answer-a">No. The reverse doesn't necessarily follow.</span><span class="answer-select" aria-hidden="true">↗</span></button><button class="answer-option" type="button" data-option="B"><span class="answer-letter">B</span><span class="answer-copy" id="answer-b">Yes, because roses are flowers.</span><span class="answer-select" aria-hidden="true">↗</span></button></div>
+          <div class="quiz-feedback" id="quiz-feedback" role="status" aria-live="polite"></div>
+          <div class="quiz-footer"><span>ACCURACY <b>✳</b> REASONING <b>✳</b> INSTRUCTIONS</span><button type="button" class="quiz-next" id="quiz-next" disabled>Next case <span aria-hidden="true">→</span></button></div>
         </div>
-        <div data-fs-error style="display:none; background:rgba(226,75,74,0.1); border:1px solid rgba(226,75,74,0.3); border-radius:0.7rem; padding:1rem 1.5rem; color:#f09595; font-size:0.88rem; margin-bottom:1rem;"></div>
-
-        <form id="contact-form" class="contact-form" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="name">Name</label>
-            <input id="name" type="text" name="name" class="form-input" placeholder="Your full name" required data-fs-field />
-            <span data-fs-error="name" style="font-size:0.78rem; color:#f09595; margin-top:0.2rem; display:block;"></span>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input id="email" type="email" name="email" class="form-input" placeholder="your@email.com" required data-fs-field />
-            <span data-fs-error="email" style="font-size:0.78rem; color:#f09595; margin-top:0.2rem; display:block;"></span>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="message">Message</label>
-            <textarea id="message" name="message" class="form-textarea" placeholder="Tell me about your project or opportunity..." required data-fs-field></textarea>
-            <span data-fs-error="message" style="font-size:0.78rem; color:#f09595; margin-top:0.2rem; display:block;"></span>
-          </div>
-          <button type="submit" class="btn-primary" data-fs-submit-btn>
-            Send Message
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </button>
-        </form>
-
-        <script>
-          window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-          formspree('initForm', { formElement: '#contact-form', formId: 'mvzngrpw' });
-        </script>
-        <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <p>Designed &amp; built by <strong>Ifeoluwa Kolawole Ojo</strong> &mdash; Marine Engineer &amp; Front-End Developer &mdash; Abeokuta, Nigeria &mdash; 2025</p>
-</footer>
+    <section class="method-section section-pad" id="method" aria-labelledby="method-title"><div class="wrap"><div class="section-kicker reveal"><span>( 04 — HOW I WORK )</span><span>LESS GUESSWORK, MORE CLARITY</span></div><h2 class="section-display method-title reveal" id="method-title">A method behind<br><em>the curiosity.</em></h2><div class="method-grid"><article class="method-card reveal"><span class="method-index">01 /</span><div class="method-symbol" aria-hidden="true">?</div><h3>Ask carefully.</h3><p>Understand the problem, scope the question, and decide what a good answer needs to do.</p></article><article class="method-card reveal"><span class="method-index">02 /</span><div class="method-symbol" aria-hidden="true">⌁</div><h3>Check the evidence.</h3><p>Look for reliable information. Separate assumptions, observations, and actual support.</p></article><article class="method-card reveal"><span class="method-index">03 /</span><div class="method-symbol" aria-hidden="true">≠</div><h3>Compare fairly.</h3><p>Use consistent criteria to identify errors, trade-offs, and meaningful differences.</p></article><article class="method-card reveal"><span class="method-index">04 /</span><div class="method-symbol" aria-hidden="true">↗</div><h3>Explain clearly.</h3><p>Turn findings into useful, concise reasoning someone else can understand and review.</p></article></div></div></section>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-          bar.style.width = bar.style.width;
-        });
-      }
-    });
-  }, { threshold: 0.2 });
-  document.querySelectorAll('#about').forEach(el => observer.observe(el));
+    <section class="about-section section-pad" id="about" aria-labelledby="about-title"><div class="wrap"><div class="section-kicker reveal"><span>( 05 — THE PERSON BEHIND THE PROCESS )</span><span>AN OPEN BOOK (MOSTLY)</span></div><div class="about-grid"><div class="about-title-wrap reveal"><div class="about-mark" aria-hidden="true"><span>i✳</span></div><h2 class="section-display" id="about-title">More than<br><em>a job title.</em></h2><span class="about-side-note">ALWAYS LEARNING.<br>ALWAYS QUESTIONING.</span></div><div class="about-content reveal"><p class="about-lead">I'm <strong>Ifeoluwa Kolawole Ojo</strong>, a 2025 graduate of Rivers State University of Science and Technology with a background in research-led problem solving.</p><p>Engineering taught me to think in systems. Research taught me to question assumptions. My growing focus on AI response evaluation brings both together: accuracy, logic, attention to detail, and judgment that can be explained.</p><p>I'm interested in thoughtful opportunities spanning research, AI quality evaluation, analytical writing, and digital projects.</p><div class="about-facts"><div><span>EDUCATION</span><strong>Bachelor's degree, 2025</strong><small>Rivers State University of Science and Technology</small></div><div><span>WHAT I WORK WITH</span><strong>Research · Analysis · Documentation</strong><small>Word, Excel, Google Docs/Sheets, HTML, CSS & JavaScript</small></div><div><span>WORK STYLE</span><strong>Independent, detail-oriented, open to collaboration</strong><small>Remote project opportunities</small></div></div><a class="pill-link pill-link-dark" href="assets/docs/Ifeoluwa_Ojo_Generalist_CV.pdf" download>Download my CV <span aria-hidden="true">↓</span></a></div></div></div></section>
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-</script>
+    <section class="contact-section" id="contact" aria-labelledby="contact-title"><div class="wrap contact-wrap"><div class="section-kicker reveal"><span>( 06 — THE NEXT CHAPTER )</span><span>YOUR MOVE</span></div><p class="contact-kicker reveal">GOT A QUESTION, PROJECT OR AN INTERESTING PROBLEM?</p><h2 class="contact-title reveal" id="contact-title">Let's make<br><em>something</em><br>make <span>sense.</span><sup>✳</sup></h2><div class="contact-bottom reveal"><a href="mailto:ifeoluwaojo211@gmail.com" class="contact-email">ifeoluwaojo211@gmail.com <span aria-hidden="true">↗</span></a><a class="contact-arrow" href="mailto:ifeoluwaojo211@gmail.com" aria-label="Send me an email">↗</a></div></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="footer-brand" href="#top">I/O <span>✳</span></a><p>Made with questions, care, and a little curiosity.</p><div class="footer-links"><a href="https://github.com/ifeoluwaojo-dev" target="_blank" rel="noopener noreferrer">GITHUB ↗</a><a href="assets/docs/Ifeoluwa_Ojo_Generalist_CV.pdf" target="_blank" rel="noopener noreferrer">CV ↗</a><a href="#top">BACK TO TOP ↑</a></div><span class="footer-year">© <span data-year>2026</span> IFEOLUWA OJO</span></div></footer>
 </body>
 </html>

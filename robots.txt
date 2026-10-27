@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ifeoluwaojo-dev.github.io/github.io/sitemap.xml
