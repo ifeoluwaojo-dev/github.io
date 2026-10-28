@@ -83,3 +83,12 @@ The site has a skip link, semantic landmarks, accessible menu buttons and live f
 ## 2026 update — FORME. Home & Living
 
 A fourth project card and a detailed e-commerce case study were added. Publish the separate `forme-home-living` repository first. Only then upload this complete portfolio folder contents (not the folder itself) to the existing `github.io` repository, replacing existing files when prompted. The new project links point to `https://ifeoluwaojo-dev.github.io/forme-home-living/`.
+
+## 2026 update — MarineOps Fleet Management
+
+Adds project number **05**, an illustrated MarineOps card and `work/marineops-fleet-management.html` case study with direct links to:
+
+- Live application: https://marineops-self.vercel.app/
+- Source code: https://github.com/ifeoluwaojo-dev/marineops
+
+Upload **the contents of this ZIP** to the root of the existing `ifeoluwaojo-dev/github.io` repository. It preserves the existing AI evaluation, research, portfolio, and FORME case studies. The new public demo uses illustrative local browser data; Supabase is not yet enabled.

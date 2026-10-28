@@ -32,3 +32,11 @@
 
 /* FORME project portfolio addition */
 .media-forme{background:#e8e0d2}.case-hero-forme{background:#dfd6c8;color:#1c2a21}.case-hero-forme .case-overline,.case-hero-forme .case-hero-meta{color:#27372c}.case-hero-forme h1 em{color:#8d634e}.case-hero-forme p{color:#455047}
+
+/* MarineOps project showcase */
+.media-marineops{background:#e7eef0}
+.media-marineops img{object-fit:contain;background:#e7eef0;padding:clamp(8px,1.5vw,24px)}
+.case-hero-marineops{background:#11323b;color:#f5f8f5}
+.case-hero-marineops .case-overline,.case-hero-marineops .case-hero-meta{color:#c8e7de}
+.case-hero-marineops h1 em{color:#78e0c8}
+.case-hero-marineops p{color:#d7e6e3}
